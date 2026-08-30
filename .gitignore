@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Experiment outputs (regenerate locally)
+data/
+artifacts/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.keras
+*.h5
+*.dat
+
+# Local IDE / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Original exploratory workspace. It contains regenerated MNIST images,
+# duplicate checkpoints, large CSV files, notebook outputs, and local paths.
+MNIST_CSV/
+2nd.ipynb
+main.ipynb
+jeet.py
+Auto encoder decoder.pptx
+Step 1.docx
+result_continues.docx
+MNIST_CSV.zip
+codetoflow.png
+Editor _ Mermaid Chart-2025-03-26-054332.png
+Editor _ Mermaid Chart-2025-03-26-054636.svg
+Editor _ Mermaid Chart-2025-03-26-055113.png
+Flowchart.png
+Flowchart1.png
+

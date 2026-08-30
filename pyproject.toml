@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mnist-class-conditional-autoencoders"
+version = "0.1.0"
+description = "Reproducible unified and class-conditional convolutional autoencoder experiments on MNIST"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "matplotlib>=3.8,<4",
+  "numpy>=1.26,<3",
+  "scikit-learn>=1.4,<2",
+  "torch>=2.2,<3",
+  "torchvision>=0.17,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+  "ruff>=0.6,<1",
+]
+
+[project.scripts]
+mnist-ae = "mnist_autoencoder.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+  "2nd.ipynb",
+  "main.ipynb",
+  "MNIST_CSV",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
