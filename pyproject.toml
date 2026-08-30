@@ -25,15 +25,12 @@ dev = [
   "pytest>=8,<10",
   "ruff>=0.6,<1",
 ]
-media = [
-  "imageio-ffmpeg>=0.5,<1",
-  "pillow>=10,<12",
-]
 
 
 [project.scripts]
 mnist-ae = "mnist_autoencoder.cli:main"
 mnist-ae-benchmark = "mnist_autoencoder.benchmark:main"
+mnist-ae-visualize = "mnist_autoencoder.visualize:main"
 
 [project.urls]
 Repository = "https://github.com/Keval-7503/mnist-class-conditional-autoencoders"

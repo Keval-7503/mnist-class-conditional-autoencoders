@@ -31,18 +31,13 @@ A linear classifier trained on frozen unified-model latents reached
 **91.17% +/- 0.32%** test accuracy,
 showing how much label information the reconstruction bottleneck retained.
 
-## Visual summary
+## Qualitative reconstruction examples
 
-![Benchmark results dashboard](results_dashboard.png)
+![Ten original and ten reconstructed MNIST digits](reconstruction_examples.png)
 
-The dashboard combines the primary condition comparison, the frozen-latent probe result, and the
-pre-specified experimental safeguards in one shareable figure.
-
-![Paired specialist effects by digit](paired_effects_by_digit.png)
-
-Every point is a paired difference on the same canonical test images. Positive values mean the
-specialist reconstructed that digit worse than the unified model; the zero line marks parity.
-
+The top row contains one canonical test example for each digit; the bottom row shows the
+corresponding reconstruction from the seed-11 unified model. This model's test MSE was 0.027516,
+matching the seed-11 observation in the benchmark artifact.
 ## Interpretation
 
 The full specialist system stores approximately ten times the parameters of the unified model.
