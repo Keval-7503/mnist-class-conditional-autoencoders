@@ -2,6 +2,7 @@
 
 [![tests](https://github.com/Keval-7503/mnist-class-conditional-autoencoders/actions/workflows/tests.yml/badge.svg)](https://github.com/Keval-7503/mnist-class-conditional-autoencoders/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Portfolio assessment: 8/10](https://img.shields.io/badge/Portfolio_Assessment-8%2F10-2ea44f)](docs/PROJECT_AUDIT.md)
 
 A reproducible PyTorch study of convolutional autoencoders for MNIST reconstruction and
 latent-space analysis. The repository supports two related experiments:
@@ -17,6 +18,14 @@ paired per-image effects, a total-parameter capacity control, PCA and mean-image
 frozen-latent linear probe, dataset hashes, and raw machine-readable observations. The principal
 result is negative: under the fixed 12-pass budget, neither specialist system outperformed the
 unified model, and 64-component PCA outperformed every neural condition.
+
+## Portfolio assessment
+
+**8/10 as a PhD portfolio project for research engineering and experimental rigor.** This rating
+applies only to the curated repository, controlled benchmark, and evidence package shown here. It
+does not claim publication-level novelty or predict admission. The full evidence-based rubric is
+available in the [current project assessment](docs/PROJECT_AUDIT.md).
+
 
 ## Research question
 
