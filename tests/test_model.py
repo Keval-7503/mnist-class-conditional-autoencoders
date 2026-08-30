@@ -21,6 +21,10 @@ class ModelTests(unittest.TestCase):
             AutoencoderConfig(latent_dim=1)
         with self.assertRaises(ValueError):
             AutoencoderConfig(dropout=1.0)
+        with self.assertRaises(ValueError):
+            AutoencoderConfig(base_channels=0)
+        with self.assertRaises(ValueError):
+            AutoencoderConfig(hidden_dim=1)
 
 
 if __name__ == "__main__":

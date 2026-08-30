@@ -12,6 +12,56 @@ from sklearn.manifold import TSNE
 from torch import nn
 
 
+def per_example_mse(
+    model: nn.Module,
+    batches: Iterable[object],
+    device: torch.device,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return one reconstruction MSE and label per image for paired analysis."""
+
+    model.eval()
+    errors: list[np.ndarray] = []
+    labels: list[np.ndarray] = []
+    with torch.no_grad():
+        for batch in batches:
+            if not isinstance(batch, tuple | list) or len(batch) < 2:
+                raise TypeError("per-example evaluation requires (images, labels) batches")
+            images = batch[0].to(device)
+            output = model(images)
+            reconstructions = output[0] if isinstance(output, tuple) else output
+            batch_errors = torch.mean((reconstructions - images) ** 2, dim=(1, 2, 3))
+            errors.append(batch_errors.cpu().numpy())
+            labels.append(torch.as_tensor(batch[1]).cpu().numpy())
+    if not errors:
+        raise ValueError("cannot evaluate an empty loader")
+    return np.concatenate(errors), np.concatenate(labels)
+
+
+def bootstrap_mean_ci(
+    values: np.ndarray,
+    confidence: float = 0.95,
+    resamples: int = 10_000,
+    seed: int = 42,
+) -> tuple[float, float]:
+    """Percentile bootstrap confidence interval for a one-dimensional mean."""
+
+    array = np.asarray(values, dtype=np.float64)
+    if array.ndim != 1 or array.size < 2:
+        raise ValueError("values must contain at least two observations")
+    if not 0.0 < confidence < 1.0 or resamples < 100:
+        raise ValueError("invalid confidence or resample count")
+    rng = np.random.default_rng(seed)
+    means = np.empty(resamples, dtype=np.float64)
+    chunk = 1_000
+    for start in range(0, resamples, chunk):
+        size = min(chunk, resamples - start)
+        indices = rng.integers(0, array.size, size=(size, array.size))
+        means[start : start + size] = array[indices].mean(axis=1)
+    alpha = (1.0 - confidence) / 2.0
+    lower, upper = np.quantile(means, [alpha, 1.0 - alpha])
+    return float(lower), float(upper)
+
+
 def extract_latents(
     model: nn.Module,
     batches: Iterable[object],

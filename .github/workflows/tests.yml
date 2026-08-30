@@ -20,3 +20,5 @@ jobs:
       - name: Test
         run: pytest
 
+      - name: Benchmark CLI smoke
+        run: python -m mnist_autoencoder.benchmark --help

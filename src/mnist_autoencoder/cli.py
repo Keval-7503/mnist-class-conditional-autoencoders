@@ -31,6 +31,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--latent-dim", type=int, default=64)
     parser.add_argument("--dropout", type=float, default=0.1)
     parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--base-channels", type=int, default=8)
+    parser.add_argument("--hidden-dim", type=int, default=64)
     parser.add_argument("--weight-decay", type=float, default=1e-5)
     parser.add_argument("--validation-fraction", type=float, default=0.1)
     parser.add_argument("--seed", type=int, default=42)
@@ -54,7 +56,14 @@ def main(argv: list[str] | None = None) -> None:
         num_workers=args.num_workers,
         download=not args.no_download,
     )
-    model = ConvAutoencoder(AutoencoderConfig(args.latent_dim, args.dropout)).to(device)
+    model = ConvAutoencoder(
+        AutoencoderConfig(
+            latent_dim=args.latent_dim,
+            dropout=args.dropout,
+            base_channels=args.base_channels,
+            hidden_dim=args.hidden_dim,
+        )
+    ).to(device)
     optimizer = torch.optim.Adam(
         model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay
     )
@@ -90,4 +99,3 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
-

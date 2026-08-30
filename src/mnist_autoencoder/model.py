@@ -14,12 +14,18 @@ class AutoencoderConfig:
 
     latent_dim: int = 64
     dropout: float = 0.1
+    base_channels: int = 8
+    hidden_dim: int = 64
 
     def __post_init__(self) -> None:
         if self.latent_dim < 2:
             raise ValueError("latent_dim must be at least 2")
         if not 0.0 <= self.dropout < 1.0:
             raise ValueError("dropout must be in [0, 1)")
+        if self.base_channels < 1:
+            raise ValueError("base_channels must be positive")
+        if self.hidden_dim < 2:
+            raise ValueError("hidden_dim must be at least 2")
 
     def to_dict(self) -> dict[str, int | float]:
         return asdict(self)
@@ -34,37 +40,38 @@ class ConvAutoencoder(nn.Module):
     def __init__(self, config: AutoencoderConfig | None = None) -> None:
         super().__init__()
         self.config = config or AutoencoderConfig()
+        self.encoded_channels = 2 * self.config.base_channels
         flat_dim = self.encoded_channels * self.encoded_size * self.encoded_size
 
         self.encoder_conv = nn.Sequential(
-            nn.Conv2d(1, 32, kernel_size=3, stride=2, padding=1),  # 28 -> 14
-            nn.BatchNorm2d(32),
+            nn.Conv2d(1, self.config.base_channels, kernel_size=3, stride=2, padding=1),
+            nn.BatchNorm2d(self.config.base_channels),
             nn.ReLU(inplace=True),
             nn.Dropout2d(self.config.dropout),
-            nn.Conv2d(32, self.encoded_channels, kernel_size=3, stride=2, padding=1),  # 14 -> 7
+            nn.Conv2d(self.config.base_channels, self.encoded_channels, 3, 2, 1),
             nn.BatchNorm2d(self.encoded_channels),
             nn.ReLU(inplace=True),
         )
         self.encoder_head = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(flat_dim, 256),
+            nn.Linear(flat_dim, self.config.hidden_dim),
             nn.ReLU(inplace=True),
-            nn.Linear(256, self.config.latent_dim),
+            nn.Linear(self.config.hidden_dim, self.config.latent_dim),
         )
         self.decoder_head = nn.Sequential(
-            nn.Linear(self.config.latent_dim, 256),
+            nn.Linear(self.config.latent_dim, self.config.hidden_dim),
             nn.ReLU(inplace=True),
-            nn.Linear(256, flat_dim),
+            nn.Linear(self.config.hidden_dim, flat_dim),
             nn.ReLU(inplace=True),
         )
         self.decoder_conv = nn.Sequential(
             nn.Unflatten(1, (self.encoded_channels, self.encoded_size, self.encoded_size)),
             nn.ConvTranspose2d(
-                self.encoded_channels, 32, kernel_size=4, stride=2, padding=1
+                self.encoded_channels, self.config.base_channels, kernel_size=4, stride=2, padding=1
             ),  # 7 -> 14
-            nn.BatchNorm2d(32),
+            nn.BatchNorm2d(self.config.base_channels),
             nn.ReLU(inplace=True),
-            nn.ConvTranspose2d(32, 1, kernel_size=4, stride=2, padding=1),  # 14 -> 28
+            nn.ConvTranspose2d(self.config.base_channels, 1, 4, 2, 1),  # 14 -> 28
             nn.Sigmoid(),
         )
 
@@ -81,4 +88,3 @@ class ConvAutoencoder(nn.Module):
     def forward(self, images: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         latents = self.encode(images)
         return self.decode(latents), latents
-

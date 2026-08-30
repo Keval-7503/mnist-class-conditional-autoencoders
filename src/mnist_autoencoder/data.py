@@ -112,9 +112,7 @@ def build_mnist_loaders(
         generator=generator,
         **common,
     )
-    validation_loader = DataLoader(
-        Subset(full_train, validation_indices), shuffle=False, **common
-    )
+    validation_loader = DataLoader(Subset(full_train, validation_indices), shuffle=False, **common)
     test_loader = DataLoader(Subset(full_test, test_indices), shuffle=False, **common)
 
     return LoaderBundle(

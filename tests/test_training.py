@@ -23,9 +23,7 @@ class TrainingTests(unittest.TestCase):
         labels = torch.zeros(3, dtype=torch.long)
         loader = DataLoader(TensorDataset(images, labels), batch_size=2)
 
-        self.assertEqual(
-            reconstruction_mse(IdentityModel(), loader, torch.device("cpu")), 0.0
-        )
+        self.assertEqual(reconstruction_mse(IdentityModel(), loader, torch.device("cpu")), 0.0)
         self.assertAlmostEqual(
             reconstruction_mse(ZeroModel(), loader, torch.device("cpu")), 35.0 / 3.0
         )

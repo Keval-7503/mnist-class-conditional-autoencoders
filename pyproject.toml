@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mnist-class-conditional-autoencoders"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reproducible unified and class-conditional convolutional autoencoder experiments on MNIST"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -25,6 +25,7 @@ dev = [
 [project.scripts]
 mnist-ae = "mnist_autoencoder.cli:main"
 
+mnist-ae-benchmark = "mnist_autoencoder.benchmark:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
