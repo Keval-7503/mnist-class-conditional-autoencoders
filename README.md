@@ -94,8 +94,8 @@ mnist-ae-benchmark \
   --batch-size 1024
 ```
 
-This writes raw per-image observations to `results/benchmark.json`, generates both figures, and
-builds `results/RESULTS.md`. The committed benchmark was produced on CPU from code revision
+This writes raw per-image observations to `results/benchmark.json`, generates the benchmark figures,
+and builds `results/RESULTS.md`. The committed benchmark was produced on CPU from code revision
 `b2b9f26a0fb03e7bedce2a2c7b1e8f9d7855f0d8`. Downloaded data and model checkpoints remain
 untracked.
 
@@ -141,6 +141,8 @@ the MSE implementation uses every element of every batch.
 
 ## Results
 
+![Benchmark results dashboard](results/results_dashboard.png)
+
 ![Three-seed reconstruction comparison](results/condition_comparison.png)
 
 | Condition | Canonical test MSE |
@@ -161,9 +163,28 @@ did not justify their added complexity under this fixed training budget.
 
 ![Per-digit paired comparison](results/per_digit_comparison.png)
 
+![Paired specialist effects by digit](results/paired_effects_by_digit.png)
+
 Read the [full result interpretation](results/RESULTS.md), [fixed experiment
 protocol](docs/EXPERIMENT_PROTOCOL.md), [data/model card](docs/DATA_AND_MODEL_CARD.md), and
 [machine-readable evidence](results/benchmark.json).
+
+## LinkedIn-ready media
+
+A concise, silent **27.5-second, 1080 x 1080 H.264 video** summarizes the research question,
+protocol, measured results, and main lesson. It uses burned-in text for feed viewing without sound;
+a separate caption file is included for accessibility.
+
+- [Download the LinkedIn project video](assets/linkedin-project-video.mp4)
+- [Download the subtitle file](assets/linkedin-project-video.srt)
+- [Open the full LinkedIn launch package](docs/LINKEDIN_POST.md)
+
+Regenerate the dashboard, paired-effect figure, video, and captions from the committed benchmark:
+
+```bash
+python -m pip install -e ".[media]"
+python scripts/generate_social_assets.py
+```
 
 ## Limitations
 

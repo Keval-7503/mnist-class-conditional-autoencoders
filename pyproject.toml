@@ -25,6 +25,11 @@ dev = [
   "pytest>=8,<10",
   "ruff>=0.6,<1",
 ]
+media = [
+  "imageio-ffmpeg>=0.5,<1",
+  "pillow>=10,<12",
+]
+
 
 [project.scripts]
 mnist-ae = "mnist_autoencoder.cli:main"

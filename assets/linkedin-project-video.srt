@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:04,000
+Can ten specialist autoencoders beat one unified model?
+
+2
+00:00:04,000 --> 00:00:08,500
+Three seeds, 63 neural fits, paired errors, and a total-parameter control.
+
+3
+00:00:08,500 --> 00:00:14,500
+PCA achieved the lowest reconstruction MSE: 0.009089.
+
+4
+00:00:14,500 --> 00:00:19,000
+Neither specialist condition improved in any of the three seeds.
+
+5
+00:00:19,000 --> 00:00:23,000
+Unified 64-dimensional latents supported 91.17 percent linear-probe accuracy.
+
+6
+00:00:23,000 --> 00:00:27,500
+Validate the comparison, not just the visualization.

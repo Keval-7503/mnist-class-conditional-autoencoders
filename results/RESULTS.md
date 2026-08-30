@@ -31,6 +31,18 @@ A linear classifier trained on frozen unified-model latents reached
 **91.17% +/- 0.32%** test accuracy,
 showing how much label information the reconstruction bottleneck retained.
 
+## Visual summary
+
+![Benchmark results dashboard](results_dashboard.png)
+
+The dashboard combines the primary condition comparison, the frozen-latent probe result, and the
+pre-specified experimental safeguards in one shareable figure.
+
+![Paired specialist effects by digit](paired_effects_by_digit.png)
+
+Every point is a paired difference on the same canonical test images. Positive values mean the
+specialist reconstructed that digit worse than the unified model; the zero line marks parity.
+
 ## Interpretation
 
 The full specialist system stores approximately ten times the parameters of the unified model.

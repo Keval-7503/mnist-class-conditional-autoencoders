@@ -74,9 +74,33 @@ the best reconstruction MSE.
 
 ## Media order
 
-1. `results/condition_comparison.png` - lead with the primary finding.
-2. `results/per_digit_comparison.png` - show that the comparison is paired by digit.
-3. `assets/linkedin-card.png` - use as the closing project card.
-4. A screenshot of the README results and passing GitHub Actions run.
+For a video post, upload `assets/linkedin-project-video.mp4` as the primary media. It is a silent,
+27.5-second square H.264 video with burned-in text, designed to remain understandable when autoplay
+is muted. Upload `assets/linkedin-project-video.srt` as the caption file if LinkedIn offers a
+caption upload during posting.
+
+For an image carousel, use:
+
+1. `results/results_dashboard.png` - lead with the complete experimental result.
+2. `results/paired_effects_by_digit.png` - show the paired effects and zero-reference line.
+3. `results/condition_comparison.png` - provide the detailed uncertainty comparison.
+4. `assets/linkedin-card.png` - close with the project identity.
+
+Recommended video-post workflow:
+
+1. Upload the MP4 directly rather than sharing only an external video link.
+2. Use the short post above as the caption and keep the repository URL visible.
+3. Select the opening frame as the thumbnail if LinkedIn requests one.
+4. Preview on mobile before publishing and confirm that no text is cropped.
 
 Do not use the historical combined t-SNE, mean-vector cosine heatmap, or inconsistent loss chart.
+
+## Regenerate the media
+
+```bash
+python -m pip install -e ".[media]"
+python scripts/generate_social_assets.py
+```
+
+The generator reads `results/benchmark.json`; the social assets therefore remain traceable to the
+same committed evidence as the research report.
