@@ -41,7 +41,9 @@ evaluated at epochs 12, 30, 60, and 120. These are exact checkpoints, not
 validation-selected "best so far" checkpoints. This design avoids retraining four independent
 trajectories and keeps randomness paired across budgets.
 
-The test set is evaluated only at the four fixed checkpoints. No checkpoint will be added, removed,
+Validation MSE is computed after every epoch to preserve the original benchmark training control
+flow and random-number stream. The test set is evaluated only at the four fixed checkpoints. No
+checkpoint will be added, removed,
 or moved after inspecting follow-up results.
 
 ## Primary comparisons

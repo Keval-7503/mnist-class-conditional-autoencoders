@@ -110,9 +110,12 @@ def _train_trajectory(
 
     for epoch in range(1, checkpoints[-1] + 1):
         train_mse = _train_epoch(model, loaders.train, optimizer, device)
+        # Match the original benchmark trajectory exactly: constructing each
+        # validation iterator advances PyTorch's RNG stream before the next
+        # epoch's dropout masks are sampled.
+        validation_mse = reconstruction_mse(model, loaders.validation, device)
         if epoch not in checkpoint_set:
             continue
-        validation_mse = reconstruction_mse(model, loaders.validation, device)
         errors, labels = per_example_mse(model, loaders.test, device)
         observation: dict[str, Any] = {
             "epoch": epoch,
