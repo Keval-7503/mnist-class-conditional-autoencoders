@@ -31,6 +31,7 @@ dev = [
 mnist-ae = "mnist_autoencoder.cli:main"
 mnist-ae-benchmark = "mnist_autoencoder.benchmark:main"
 mnist-ae-visualize = "mnist_autoencoder.visualize:main"
+mnist-ae-sweep = "mnist_autoencoder.sweep:main"
 
 [project.urls]
 Repository = "https://github.com/Keval-7503/mnist-class-conditional-autoencoders"

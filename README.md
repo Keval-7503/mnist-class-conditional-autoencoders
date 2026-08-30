@@ -157,6 +157,18 @@ The test suite covers model shapes, deterministic stratified splits, complete MS
 capacity matching, benchmark integrity, and reconstruction-example selection. GitHub Actions runs
 the same checks on every push and pull request.
 
+## Pre-specified epoch-budget follow-up
+
+A separate confirmatory follow-up tests whether the condition ranking changes at exact epochs 12,
+30, 60, and 120. Its checkpoint schedule, seeds, paired analysis, and crossover decision rule were
+frozen before generating follow-up test results.
+
+See the [epoch-sweep protocol](docs/EPOCH_SWEEP_PROTOCOL.md). The follow-up runs independently of
+the original benchmark:
+
+```bash
+mnist-ae-sweep --data-dir data --no-download
+```
 ## Limitations
 
 - MNIST is an educational benchmark and does not establish real-world generalization.
