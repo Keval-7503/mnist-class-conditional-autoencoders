@@ -1,70 +1,82 @@
 # LinkedIn launch package
 
-Publish this only after replacing `[REPOSITORY LINK]` and confirming authorship. The wording is
-deliberately honest about the project's status and does not claim state-of-the-art results.
+Publish only after confirming contributor attribution, selecting a license, and making the
+repository public.
 
 ## Recommended post
 
-I’m sharing a project that taught me an important research lesson: getting a neural network to run
-is only the beginning—the experimental design determines whether the result means anything.
+Can ten digit-specialist autoencoders reconstruct MNIST better than one unified model?
 
-I started by training convolutional autoencoders for MNIST digit reconstruction and exploring their
-64-dimensional latent representations with PCA and t-SNE. During a full reproducibility audit, I
-found several issues that are easy to miss in exploratory ML work: data-split leakage, inconsistent
-metric provenance, and direct comparison of coordinates from independently trained latent spaces.
+I initially expected specialization to help. Instead of selecting the most attractive exploratory
+plot, I rebuilt the project as a controlled, reproducible experiment and kept the negative result.
 
-I rebuilt the project around a defensible protocol:
+The final study includes:
 
-• preserved the official MNIST test partition  
-• added a seeded, stratified validation split  
-• implemented validation-based early stopping  
-• computed reconstruction MSE over every evaluated pixel  
-• added a unified encoder for valid cross-class latent analysis  
-• packaged the code with tests, CI, and recorded experiment metadata
+- the untouched official 60,000/10,000 MNIST train/test partition;
+- three predetermined seeds and 63 neural model fits;
+- paired per-image reconstruction errors and bootstrap intervals;
+- a ten-model specialist system with 10x total parameters;
+- a second specialist system within 3% of the unified model's total parameter count;
+- 64-component PCA and global-mean baselines;
+- a frozen-latent linear probe; and
+- tests, CI, source hashes, environment provenance, and machine-readable observations.
 
-The most valuable outcome was not a prettier t-SNE plot. It was learning to question whether the
-comparison itself was valid—and redesigning the experiment when it was not.
+Canonical test MSE (lower is better):
 
-Next, I’m running a multi-seed comparison between unified and class-conditional autoencoders,
-including capacity-matched baselines and quantitative representation evaluation.
+- PCA: 0.009089
+- Unified autoencoder: 0.016295 +/- 0.009734
+- Full specialists: 0.091855 +/- 0.002117
+- Parameter-budget-matched specialists: 0.157198 +/- 0.015268
 
-Code and methodology: [REPOSITORY LINK]
+Neither specialist condition improved on the unified model in any of the three seeds. The unified
+64-dimensional latents still supported 91.17% +/- 0.32% linear-probe accuracy.
 
-#MachineLearning #DeepLearning #PyTorch #Autoencoders #ReproducibleResearch #ComputerVision
-#ResearchEngineering #PhD
+The result changed how I think about ML research. More models and more nonlinear capacity do not
+automatically create a stronger method. A simple baseline can overturn the story, and a negative
+finding is useful when the protocol and limitations are visible.
+
+One important limitation: all 63 neural fits reached the fixed 12-epoch ceiling. These numbers
+therefore measure performance under a fixed data-pass budget, not asymptotic convergence. A
+longer-training study would be a separate follow-up rather than a post-hoc adjustment.
+
+Code, protocol, figures, and raw evidence:
+https://github.com/Keval-7503/mnist-class-conditional-autoencoders
+
+#MachineLearning #DeepLearning #PyTorch #ReproducibleResearch #Autoencoders
+#ResearchEngineering #NegativeResults
 
 ## Short version
 
-I rebuilt my MNIST autoencoder project after a reproducibility audit uncovered data-split,
-metric-provenance, and latent-space comparison issues.
+I rebuilt an exploratory MNIST autoencoder project as a three-seed controlled study with 63 neural
+fits, paired test-image analysis, a total-parameter capacity control, PCA and mean-image baselines,
+a frozen-latent probe, tests, CI, and complete provenance.
 
-The new PyTorch repository preserves the official test set, uses seeded validation and early
-stopping, records complete metrics, tests the core logic, and uses a shared encoder for defensible
-cross-class latent analysis.
+The negative result was the useful result: neither specialist system beat the unified model in any
+seed, and 64-component PCA achieved the lowest reconstruction MSE.
 
-The biggest lesson: a clean visualization is not evidence unless the underlying comparison is
-valid.
+The project reinforced a simple research lesson: validate the comparison, report the baseline, and
+keep the result even when it contradicts the original hypothesis.
 
-[REPOSITORY LINK]
+https://github.com/Keval-7503/mnist-class-conditional-autoencoders
 
-#PyTorch #MachineLearning #ReproducibleResearch #Autoencoders
+#PyTorch #MachineLearning #ReproducibleResearch #NegativeResults
 
-## Suggested project entry for a LinkedIn profile
+## Suggested LinkedIn project entry
 
-**MNIST Class-Conditional Autoencoders — Reproducible Representation Study**
+**Unified vs. Class-Specific Autoencoders - Controlled MNIST Study**
 
-Built and audited a PyTorch experiment framework comparing unified and digit-specific convolutional
-autoencoders. Preserved the canonical MNIST test split, implemented deterministic validation-based
-training and complete per-class MSE evaluation, and corrected invalid raw comparisons across
-independently trained latent spaces. Added automated tests, CI, experiment metadata, limitations,
-and a multi-seed evaluation plan.
+Designed and implemented a reproducible PyTorch study comparing unified and oracle-routed
+class-specific autoencoders across three seeds and 63 model fits. Added a parameter-budget-matched
+control, PCA and mean-image baselines, paired per-image bootstrap analysis, a frozen-latent linear
+probe, automated tests, CI, source-data hashes, and machine-readable evidence. Found that neither
+specialist condition improved under the fixed training budget and that 64-component PCA achieved
+the best reconstruction MSE.
 
 ## Media order
 
-1. `assets/linkedin-card.png` — lead image.
-2. A newly generated original-versus-reconstruction grid from the clean unified run.
-3. A per-digit MSE figure with error bars across seeds.
-4. A PCA/t-SNE figure from the unified encoder, captioned as exploratory visualization.
+1. `results/condition_comparison.png` - lead with the primary finding.
+2. `results/per_digit_comparison.png` - show that the comparison is paired by digit.
+3. `assets/linkedin-card.png` - use as the closing project card.
+4. A screenshot of the README results and passing GitHub Actions run.
 
-Do not use the old combined t-SNE, mean-vector cosine heatmap, or inconsistent loss chart.
-
+Do not use the historical combined t-SNE, mean-vector cosine heatmap, or inconsistent loss chart.

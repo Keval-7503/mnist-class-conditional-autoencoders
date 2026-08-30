@@ -1,8 +1,37 @@
 # Project audit and PhD-portfolio assessment
 
 Audit date: 2026-08-30
+## Remediation outcome
 
-## Decision
+**Curated repository score: 8/10 as a PhD portfolio project.**
+
+This score applies to the remediated repository and its demonstrated research process. It does not
+mean the MNIST method is publication-level novelty, nor does it rate the applicant or predict
+admission.
+
+| Dimension | Current score | Remediation evidence |
+|---|---:|---|
+| Technical execution | 8/10 | Configurable models, 63 controlled fits, package CLI, tests, CI, automatic reports |
+| Research question | 8/10 | Explicit H1/H2, fixed estimand, oracle-routing caveat, capacity-control question |
+| Methodological validity | 8.5/10 | Canonical test set, training-only validation, paired errors, fixed interpretation rules |
+| Reproducibility | 9/10 | Fixed seeds, source hashes, exact code revision, environment metadata, raw observations |
+| Evaluation depth | 8.5/10 | Three seeds, per-image bootstrap, per-digit effects, capacity control, PCA/mean baselines, probe |
+| Communication | 8.5/10 | Results-first README, figures, protocol, result report, data/model card, honest negative finding |
+| Originality | 4.5/10 | The controlled specialization question is useful, but MNIST autoencoding remains well established |
+
+The main result is deliberately negative. Under 12 complete training-set passes, the unified model
+achieved 0.016295 +/- 0.009734 canonical-test MSE, compared with 0.091855 +/- 0.002117 for full
+specialists and 0.157198 +/- 0.015268 for total-parameter-matched specialists. PCA performed best
+at 0.009089. Specialists improved in 0/3 seeds. All 63 neural fits reached the epoch ceiling, so
+the claim is explicitly limited to fixed-budget performance.
+
+The remaining ceiling is topic novelty: replacing MNIST with a harder dataset or adding a
+principled cross-encoder alignment method would be necessary to push the project beyond an
+excellent reproducibility/experimental-design portfolio piece.
+
+
+
+## Original-project decision
 
 **Do not publish the original folder as-is. Publish only the curated repository files after a clean
 experiment run.**
@@ -12,9 +41,9 @@ connect implementation, visualization, and written reporting. In its original fo
 does not yet provide sufficiently reliable evidence of research ability for a competitive PhD
 application.
 
-## Score
+## Original-project score
 
-**Current PhD-portfolio signal: 3/10.**
+**Original PhD-portfolio signal before remediation: 3/10.**
 
 **Potential after the proposed rerun and report revision: 6.5–7/10.**
 
