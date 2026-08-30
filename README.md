@@ -1,6 +1,7 @@
 # MNIST Class-Conditional Autoencoders
 
 [![tests](https://github.com/Keval-7503/mnist-class-conditional-autoencoders/actions/workflows/tests.yml/badge.svg)](https://github.com/Keval-7503/mnist-class-conditional-autoencoders/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A reproducible PyTorch study of convolutional autoencoders for MNIST reconstruction and
 latent-space analysis. The repository supports two related experiments:
@@ -169,10 +170,10 @@ protocol](docs/EXPERIMENT_PROTOCOL.md), [data/model card](docs/DATA_AND_MODEL_CA
 
 ## Project status
 
-The controlled study, eight-test suite, CI workflow, evidence JSON, figures, protocol, and
+The controlled study, twelve-test suite, CI workflow, evidence JSON, figures, protocol, and
 data/model card are complete. The original exploratory assets remain locally available but are
 excluded from the research repository because their split and metric provenance were inconsistent.
-See the [historical audit](docs/PROJECT_AUDIT.md) for that decision trail.
+See the [current project assessment](docs/PROJECT_AUDIT.md) for the evidence and rating.
 
 ## Data and references
 
@@ -184,8 +185,8 @@ See the [historical audit](docs/PROJECT_AUDIT.md) for that decision trail.
 - Larsen, Sønderby, Larochelle, and Winther (2016), *Autoencoding beyond pixels using a learned
   similarity metric*.
 
-## Authorship and license
+## Author, citation, and license
 
-Before making this repository public, confirm contributor names, roles, permission to publish any
-jointly authored material, and the intended software license. No license is currently granted.
-
+This curated research repository is solely authored and maintained by **Keval Dilipbhai Patel**.
+Citation metadata are provided in [CITATION.cff](CITATION.cff). The software and documentation are
+released under the [MIT License](LICENSE); MNIST remains subject to its original terms.

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software or evidence package, please cite it using these metadata."
+title: "MNIST Class-Conditional Autoencoders: A Controlled Reproducibility Study"
+type: software
+authors:
+  - family-names: Patel
+    given-names: Keval Dilipbhai
+repository-code: "https://github.com/Keval-7503/mnist-class-conditional-autoencoders"
+url: "https://github.com/Keval-7503/mnist-class-conditional-autoencoders"
+version: 0.2.0
+date-released: 2026-08-30
+license: MIT
+keywords:
+  - autoencoder
+  - MNIST
+  - reproducible research
+  - negative results
+  - PyTorch

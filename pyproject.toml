@@ -6,6 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "mnist-class-conditional-autoencoders"
 version = "0.2.0"
 description = "Reproducible unified and class-conditional convolutional autoencoder experiments on MNIST"
+authors = [{ name = "Keval Dilipbhai Patel" }]
+license = { file = "LICENSE" }
+keywords = ["autoencoder", "MNIST", "PyTorch", "reproducible research", "negative results"]
+
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -24,8 +28,12 @@ dev = [
 
 [project.scripts]
 mnist-ae = "mnist_autoencoder.cli:main"
-
 mnist-ae-benchmark = "mnist_autoencoder.benchmark:main"
+
+[project.urls]
+Repository = "https://github.com/Keval-7503/mnist-class-conditional-autoencoders"
+Results = "https://github.com/Keval-7503/mnist-class-conditional-autoencoders/blob/main/results/RESULTS.md"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

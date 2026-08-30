@@ -1,7 +1,7 @@
 # LinkedIn launch package
 
-Publish only after confirming contributor attribution, selecting a license, and making the
-repository public.
+The repository is publication-ready under the MIT License and credits Keval Dilipbhai Patel as
+its sole author.
 
 ## Recommended post
 
